@@ -3,6 +3,7 @@ import Slider from './Shared/Slider';
 import OrderOutline from './Shared/OrderOutline';
 import background from './../../assets/home/chef-service.jpg'
 import OurMenu from './Shared/OurMenu';
+import Featured from './Shared/Featured';
 
 const Home = () => {
     return (
@@ -24,6 +25,7 @@ const Home = () => {
             </div>
 
             <OurMenu></OurMenu>
+            <Featured></Featured>
 
 
         </div>
