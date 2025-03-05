@@ -5,7 +5,7 @@ import chefService from '../../../assets/home/featured.jpg';
 const Featured = () => {
     return (
         <div 
-            className="relative text-white bg-cover bg-center bg-no-repeat"
+            className="relative text-white bg-cover bg-fixed bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${chefService})` }}
         >
             
@@ -28,7 +28,7 @@ const Featured = () => {
                             dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore 
                             consequatur consequuntur omnis ullam maxime tenetur.
                         </p>
-                        <button className="btn mt-4 btn-outline btn-primary">Explore More</button>
+                        <button className="btn mt-4 btn-outline border-0 border-b-4">Explore More</button>
                     </div>
                 </div>
             </div>

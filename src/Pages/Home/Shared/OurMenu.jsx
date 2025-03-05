@@ -21,6 +21,10 @@ const OurMenu = () => {
                 {
                     menu.map((single,indx) => <MenuItemCard key={indx} item={single}></MenuItemCard>)
                 }
+                
+            </div>
+            <div className='text-center my-4'>
+            <button className='btn btn-outline border-0 border-b-2 '>More Mneu</button>
             </div>
         </div>
     );
