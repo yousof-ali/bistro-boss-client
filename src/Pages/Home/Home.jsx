@@ -5,10 +5,14 @@ import background from './../../assets/home/chef-service.jpg'
 import OurMenu from './Shared/OurMenu';
 import Featured from './Shared/Featured';
 import Testimonials from './Shared/Testimonials';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div className='relative'>
+            <Helmet>
+                <title>Bistro Boss | Home</title>
+            </Helmet>
             <Slider></Slider>
             <OrderOutline></OrderOutline>
 
