@@ -3,106 +3,48 @@ import { Helmet } from 'react-helmet-async';
 import Cover from '../../Shared/Cover';
 import background from '../../assets/menu/banner3.jpg'
 import SectionTitle from '../../Components/SectionTitle';
-import OurMenu from '../Home/Shared/OurMenu';
-import desserts from '../../assets/menu/dessert-bg.jpeg'
-import MenuItemCard from '../../Components/MenuItemCard';
+import dessert from '../../assets/menu/dessert-bg.jpeg'
 import pizza from '../../assets/menu/pizza-bg.jpg'
 import salad from '../../assets/menu/salad-bg.jpg'
-import soups from '../../assets/menu/soup-bg.jpg'
+import soup from '../../assets/menu/soup-bg.jpg'
+import userMenu from '../../hook/useMenu';
+import Menucategory from './Menucategory';
 
 const Menu = () => {
+    const [menu] = userMenu();
     useEffect(() => {
         document.title = "Bistro Boss | Menu";
     }, []);
-    const [menu, setMenu] = useState([])
-    useEffect(() => {
-        fetch('/menu.json')
-            .then(res => res.json())
-            .then(result => {
-                setMenu(result);
-            })
-    }, []);
+    
+    const todayOffer = menu.filter(single => single.category === 'offered');
+    const desserts = menu.filter(single => single.category === 'dessert');
+    const salads = menu.filter(single => single.category === 'salad');
+    const soups = menu.filter(single => single.category === 'soup');
+    const pizzas = menu.filter(single => single.category === 'pizza')
+
+
     return (
         <div>
             <Helmet>
                 <title>Bistro Boss | Menu</title>
             </Helmet>
             <Cover img={background} title={"OUR MENU"} subtitle={"WOULD YOU LIKE TO TRY A DISH"}></Cover>
+
             <div className='my-12'>
                 <SectionTitle Heading={"TODAY'S OFFER"} subHeading={"Don't miss"}></SectionTitle>
-                <div className='grid md:grid-cols-2 gap-8'>
-                    {
-                        menu.filter(single => single.category === 'popular').map((single, indx) => <MenuItemCard key={indx} item={single}></MenuItemCard>)
-                    }
-
-                </div>
-                <div className='mt-6 text-center'>
-                    <button className='btn btn-outline border-0 border-b-3'>ORDER YOUR FAVOURITE FOOD</button>
-                </div>
-
+                    <Menucategory data={todayOffer}></Menucategory>
             </div>
-
-
-
             <div className='my-12'>
-                <Cover img={desserts} title={'Dessert'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-                <div className='my-8'>
-                    <div className='grid md:grid-cols-2 gap-8'>
-                        {
-                            menu.filter(single => single.category === 'dessert').slice(2, 8).map((single, indx) => <MenuItemCard key={indx} item={single}></MenuItemCard>)
-                        }
-
-                    </div>
-                    <div className='mt-6 text-center'>
-                        <button className='btn btn-outline border-0 border-b-3'>ORDER YOUR FAVOURITE FOOD</button>
-                    </div>
-
-                </div>
+                    <Menucategory coverImg={dessert} coverIitle={'Dessert'} data={desserts}></Menucategory>
             </div>
             <div>
-                <Cover img={salad} title={'Salads'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-                <div className='my-8'>
-                    <div className='grid md:grid-cols-2 gap-8'>
-                        {
-                            menu.filter(single => single.category === 'salad').map((single, indx) => <MenuItemCard key={indx} item={single}></MenuItemCard>)
-                        }
-
-                    </div>
-                    <div className='mt-6 text-center'>
-                        <button className='btn btn-outline border-0 border-b-3'>ORDER YOUR FAVOURITE FOOD</button>
-                    </div>
-
-                </div>
+                    <Menucategory coverImg={salad} coverIitle={'Salad'} data={salads}></Menucategory>
             </div>
             <div className='my-12'>
-                <Cover img={soups} title={'Soups'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-                <div className='my-8'>
-                    <div className='grid md:grid-cols-2 gap-8'>
-                        {
-                            menu.filter(single => single.category === 'soup').map((single, indx) => <MenuItemCard key={indx} item={single}></MenuItemCard>)
-                        }
-
-                    </div>
-                    <div className='mt-6 text-center'>
-                        <button className='btn btn-outline border-0 border-b-3'>ORDER YOUR FAVOURITE FOOD</button>
-                    </div>
-
-                </div>
+                    <Menucategory coverIitle={"Soups"} coverImg={soup} data={soups}></Menucategory>
             </div>
             <div className='mb-12'>
-                <Cover img={pizza} title={'Pizza'} subtitle={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}></Cover>
-                <div className='my-8'>
-                    <div className='grid md:grid-cols-2 gap-8'>
-                        {
-                            menu.filter(single => single.category === 'pizza').map((single, indx) => <MenuItemCard key={indx} item={single}></MenuItemCard>)
-                        }
-
-                    </div>
-                    <div className='mt-6 text-center'>
-                        <button className='btn btn-outline border-0 border-b-3'>ORDER YOUR FAVOURITE FOOD</button>
-                    </div>
-
-                </div>
+                    <Menucategory coverImg={pizza} coverIitle={'Pizza'} data={pizzas}></Menucategory>
             </div>
         </div>
     );
