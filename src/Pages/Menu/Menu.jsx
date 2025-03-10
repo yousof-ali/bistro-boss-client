@@ -35,16 +35,16 @@ const Menu = () => {
                     <Menucategory data={todayOffer}></Menucategory>
             </div>
             <div className='my-12'>
-                    <Menucategory coverImg={dessert} coverIitle={'Dessert'} data={desserts}></Menucategory>
+                    <Menucategory coverImg={dessert} coverIitle={'dessert'} data={desserts}></Menucategory>
             </div>
             <div>
-                    <Menucategory coverImg={salad} coverIitle={'Salad'} data={salads}></Menucategory>
+                    <Menucategory coverImg={salad} coverIitle={'salad'} data={salads}></Menucategory>
             </div>
             <div className='my-12'>
-                    <Menucategory coverIitle={"Soups"} coverImg={soup} data={soups}></Menucategory>
+                    <Menucategory coverIitle={"soups"} coverImg={soup} data={soups}></Menucategory>
             </div>
             <div className='mb-12'>
-                    <Menucategory coverImg={pizza} coverIitle={'Pizza'} data={pizzas}></Menucategory>
+                    <Menucategory coverImg={pizza} coverIitle={'pizza'} data={pizzas}></Menucategory>
             </div>
         </div>
     );
