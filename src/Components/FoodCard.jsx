@@ -15,7 +15,7 @@ const FoodCard = ({data}) => {
                 <p>{recipe}</p>
                
                 <div className="card-actions justify-center mt-4">
-                    <button className="btn btn-neutral">ADD TO CART</button>
+                <button  className='btn btn-outline border-0 border-b-3  hover:bg-black bg-base-200 text-yellow-600'>ADD TO CART</button>
                 </div>
             </div>
         </div>

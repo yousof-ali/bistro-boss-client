@@ -6,7 +6,7 @@ const userMenu = () => {
     const [loader,setLoader] = useState(true);
     useEffect(() => {
         setLoader(true);
-        fetch('/menu.json')
+        fetch('http://localhost:5000/menu')
             .then(res => res.json())
             .then(result => {            
                 setMenu(result)
