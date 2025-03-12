@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const{user} = useContext(AuthContext);
- 
+  const { user,logOutUser } = useContext(AuthContext);
+  const navigate = useNavigate()
+
   const link = (
     <>
       <li>
@@ -17,20 +19,51 @@ const Navbar = () => {
         <NavLink to={'/order/salad'}>Order</NavLink>
       </li>
       {
-        !user&&<><li>
-        <NavLink to={'/login'}>Login</NavLink>
-      </li>
-      <li>
-        <NavLink to={'/sign-up'}>Sign Up</NavLink>
-      </li>
-      </>
+        user ? <>
+        <li>
+          <NavLink to={'/private'}>PrivateRoute</NavLink>
+        </li>
+        </>:<>
+        <li>
+          <NavLink to={'/login'}>Login</NavLink>
+        </li>
+          <li>
+            <NavLink to={'/sign-up'}>Sign Up</NavLink>
+          </li>
+        </>
       }
-      
+
 
     </>
   );
 
+  const handleLogOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to log out now!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Log Out!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOutUser()
+        .then(_ => {
+          Swal.fire({
+            title: "Log out",
+            text: "log out successully.",
+            icon: "success"
+          });
+        })
+        navigate('/')
+       
+      }
+    });
+  }
+
   return (
+
     <div className="navbar fixed max-w-screen-xl w-full z-20 bg-black/30 text-white shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
@@ -64,7 +97,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {
-          !user?<button className="btn">Login</button>:<Link><button className="btn">Log Out</button></Link>
+          !user ? <Link to={'/login'}><button className="btn">Login</button></Link> :<button onClick={handleLogOut} className="btn">Log Out</button>
         }
       </div>
     </div>
