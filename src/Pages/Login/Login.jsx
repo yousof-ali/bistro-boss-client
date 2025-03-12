@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import background from '../../assets/others/authentication1.png'
 import image from '../../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const [btndisabled, setBtnDisabled] = useState(true);
-    const [enable,setenable] = useState(false);
-    const captchaRef = useRef('');
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -17,10 +17,11 @@ const Login = () => {
         const password = form.pass.value;
         console.log(email, password)
     }
-    const handleCaptcha = () => {
-        if (validateCaptcha(captchaRef.current.value) == true) {
+    const handleCaptcha = (e) => {
+        const userCaptcha = e.target.value
+        if (validateCaptcha(userCaptcha) == true) {
             setBtnDisabled(false)
-            setenable(true);
+            
         }
 
         else {
@@ -36,6 +37,9 @@ const Login = () => {
                 backgroundPosition: 'center',
             }}
             className="hero min-h-screen">
+            <Helmet>
+                <title>Bistro Boss | Login</title>
+            </Helmet>
             <div className="hero-content gap-8 flex-col lg:flex-row">
                 <div className='flex-1 hidden lg:flex'>
                     <img className='p-8' src={background} alt="" />
@@ -46,20 +50,18 @@ const Login = () => {
                         <form onSubmit={handleLogin} action="">
                             <fieldset className="fieldset">
                                 <label className="fieldset-label font-bold text-lg">Email</label>
-                                <input type="email" name='email' className="input mb-2 w-full" placeholder="Email" />
+                                <input type="email" name='email' className="input mb-2 w-full" placeholder="Email" required />
                                 <label className="fieldset-label  font-bold text-lg">Password</label>
-                                <input type="password" name='pass' className="input w-full" placeholder="Password" />
+                                <input type="password" name='pass' className="input w-full" placeholder="Password"required/>
 
                                 <label className="fieldset-label py-4"> <div className=' w-full bg-white'><LoadCanvasTemplate /></div></label>
-                                <input type="text" ref={captchaRef} className="input w-full" placeholder="type hear captcha" />
-                                <div>
-                                    <button disabled={enable}  onClick={handleCaptcha} className='btn btn-neutral my-4'>validation captcha</button>
-                                </div>
+                                <input type="text" onBlur={handleCaptcha}  className="input w-full" placeholder="type hear captcha" />
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <button disabled={btndisabled} type='submit' className="btn  text-white bg-[#D1A054] mt-4">Login</button>
                             </fieldset>
                         </form>
-                        <p className='text-lg py-4 text-center  text-[#D1A054]'>New here? <button className='btn btn-link font-bold text-lg text-[#D1A054]'>Create a New Account</button></p>
+                        <p className='text-lg py-4 text-center  text-[#D1A054]'>New here? <Link to={'/sign-up'}>
+                            <button className='btn btn-link font-bold text-lg text-[#D1A054]'>Create a New Account</button></Link></p>
                         <p className='text-center '>Or sign in with</p>
                     </div>
                 </div>

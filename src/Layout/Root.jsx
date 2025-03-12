@@ -6,7 +6,7 @@ import Footer from '../Shared/Footer';
 
 const Root = () => {
     const location = useLocation();
-    const isexistHeaderFooter = location.pathname.includes('login');
+    const isexistHeaderFooter = location.pathname.includes('login')||location.pathname.includes('sign-up');
     return (
         <div>
             {isexistHeaderFooter || <Navbar></Navbar>}
