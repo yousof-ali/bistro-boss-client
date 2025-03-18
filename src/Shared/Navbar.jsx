@@ -39,9 +39,9 @@ const Navbar = () => {
       }
 
       <li className="mr-4">
-        <NavLink to={'/'}><button className="btn gap-4 text-2xl">
+        <Link to={'/dashboard/cart'}><button className="btn gap-4 text-2xl">
         <FaShoppingCart /> <div className="badge badge-sm badge-secondary">+{cart.length}</div>
-        </button></NavLink>
+        </button></Link>
       </li>
 
     </>
