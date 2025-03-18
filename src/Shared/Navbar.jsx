@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import { FaShoppingCart } from "react-icons/fa";
+
 
 const Navbar = () => {
-  const { user,logOutUser } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const navigate = useNavigate()
 
   const link = (
@@ -20,19 +22,25 @@ const Navbar = () => {
       </li>
       {
         user ? <>
-        <li>
-          <NavLink to={'/private'}>PrivateRoute</NavLink>
-        </li>
-        </>:<>
-        <li>
-          <NavLink to={'/login'}>Login</NavLink>
-        </li>
+          <li>
+            <NavLink to={'/private'}>PrivateRoute</NavLink>
+          </li>
+        </> : <>
+          <li>
+            <NavLink to={'/login'}>Login</NavLink>
+          </li>
           <li>
             <NavLink to={'/sign-up'}>Sign Up</NavLink>
           </li>
         </>
+
       }
 
+      <li className="mr-4">
+        <NavLink to={'/'}><button className="btn gap-4 text-2xl">
+        <FaShoppingCart /> <div className="badge badge-sm badge-secondary">+0</div>
+        </button></NavLink>
+      </li>
 
     </>
   );
@@ -49,15 +57,15 @@ const Navbar = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         logOutUser()
-        .then(_ => {
-          Swal.fire({
-            title: "Log out",
-            text: "log out successully.",
-            icon: "success"
-          });
-        })
+          .then(_ => {
+            Swal.fire({
+              title: "Log out",
+              text: "log out successully.",
+              icon: "success"
+            });
+          })
         navigate('/')
-       
+
       }
     });
   }
@@ -93,11 +101,12 @@ const Navbar = () => {
         <a className="btn btn-ghost text-xl">BISTRO BOSS</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{link}</ul>
+        <ul className="menu items-center menu-horizontal px-1">{link}</ul>
       </div>
       <div className="navbar-end">
+
         {
-          !user ? <Link to={'/login'}><button className="btn">Login</button></Link> :<button onClick={handleLogOut} className="btn">Log Out</button>
+          !user ? <Link to={'/login'}><button className="btn">Login</button></Link> : <button onClick={handleLogOut} className="btn">Log Out</button>
         }
       </div>
     </div>
