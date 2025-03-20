@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/SocialLogin';
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext);
@@ -83,6 +84,7 @@ const Login = () => {
                         <p className='text-lg py-4 text-center  text-[#D1A054]'>New here? <Link to={'/sign-up'}>
                             <button className='btn btn-link font-bold text-lg text-[#D1A054]'>Create a New Account</button></Link></p>
                         <p className='text-center '>Or sign in with</p>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
 
