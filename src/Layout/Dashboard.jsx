@@ -8,17 +8,12 @@ import { MdManageHistory } from "react-icons/md";
 import { MdManageSearch } from "react-icons/md";
 import { MdManageAccounts } from "react-icons/md";
 import { FaPlusCircle } from "react-icons/fa";
-
-
-
-
-
-
+import useAdmin from '../hook/useAdmin';
 
 
 
 const Dashboard = () => {
-    const isAdimn = true;
+    const [isAdimn] = useAdmin()
     return (
         <div className='flex'>
             <div className='w-64 p-4 min-h-screen bg-[#D1A054]'>
