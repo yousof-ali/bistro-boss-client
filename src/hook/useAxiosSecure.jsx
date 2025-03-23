@@ -21,10 +21,10 @@ const useAxiosSecure = () => {
 
     axiosSecure.interceptors.response.use(function (response) {
         return response
-    },function(err){
-        const status = err.response.status
+    },async(err) => {
+        const status = err.response?.status
         if(status==401|| status===403){
-            logOutUser()
+            await logOutUser()
             .then(_=> {
                 navigate('/login')
             })

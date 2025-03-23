@@ -6,7 +6,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 const AdminPrivateRoute = ({children}) => {
 
     const [isAdmin, isAdminLoading] = useAdmin()
-    const [user, loader] = useAuth()
+    const {user, loader} = useAuth()
     const location = useLocation()
     if (user && isAdmin) {
         return children;
@@ -16,7 +16,7 @@ const AdminPrivateRoute = ({children}) => {
             <span className="loading loading-dots loading-xl"></span>
         </div>;
     }
-    return <Navigate to={'/login'} state={{ from: location }}></Navigate>;
+    return <Navigate to={'/'} state={{ from: location }}></Navigate>;
 };
 
 export default AdminPrivateRoute;

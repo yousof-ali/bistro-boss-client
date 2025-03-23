@@ -196,7 +196,7 @@ const Dashboard = () => {
 
                 </ul>
             </div>
-            <div className='flex-1 bg-base-200'>
+            <div className='flex-1 bg-base-100'>
                 <Outlet />
             </div>
         </div>
