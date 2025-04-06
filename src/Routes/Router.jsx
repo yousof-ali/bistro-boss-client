@@ -15,6 +15,9 @@ import Cart from "../Pages/Dashboard/Cart/Cart";
 import Allusers from "../Pages/Dashboard/Cart/Admin/Allusers";
 import AddItems from "../Pages/Dashboard/Cart/Admin/AddItems";
 import AdminPrivateRoute from "./AdminPrivateRoute";
+import ManageItems from "../Pages/Dashboard/Cart/Admin/ManageItems";
+import UpdateMenu from "../Pages/Dashboard/Cart/Admin/UpdateMenu";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 
 
@@ -57,14 +60,27 @@ const router = createBrowserRouter([
           path:'cart',
           element:<Cart></Cart>
         },
+        {
+          path:'cart/pyment',
+          element:<Payment></Payment>
+        },
         // admin routes 
         {
           path:'add-items',
           element:<AdminPrivateRoute><AddItems></AddItems></AdminPrivateRoute>
+        
         },
         {
           path:'all-user',
-          element:<Allusers></Allusers>
+          element:<AdminPrivateRoute><Allusers></Allusers></AdminPrivateRoute>
+        },
+        {
+          path:'manage-items',
+          element:<AdminPrivateRoute><ManageItems></ManageItems></AdminPrivateRoute>
+        },
+        {
+          path:'manage-items/update/:id',
+          element:<AdminPrivateRoute><UpdateMenu></UpdateMenu></AdminPrivateRoute>
         }
       ]
     }

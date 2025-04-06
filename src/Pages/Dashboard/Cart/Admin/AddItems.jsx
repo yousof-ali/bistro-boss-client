@@ -2,6 +2,8 @@ import React from 'react';
 import SectionTitle from '../../../../Components/SectionTitle';
 import { useForm } from 'react-hook-form';
 import userAxiosPublic from '../../../../hook/userAxiosPublic'
+import useAxiosSecure from '../../../../hook/useAxiosSecure'
+import Swal from 'sweetalert2';
 
 const image_api_key = import.meta.env.VITE_IMAGE_HOSTING_API_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_api_key}`
@@ -9,16 +11,35 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_api_key}`
 const AddItems = () => {
     const { register, handleSubmit } = useForm()
     const axiosPublic = userAxiosPublic();
-    const onSubmit = async(data) => {
-        const imageFile = {image:data.image[0]}
-        const res =  await axiosPublic.post(image_hosting_api,imageFile,{
-            headers:{
-                'content-type':'multipart/form-data'
+    const axiosSecure = useAxiosSecure()
+    const onSubmit = async (data) => {
+        console.log(data);
+        const imageFile = { image: data.image[0] }
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
             }
         });
+        if (res.data.success) {
+            const newMenu = {
+                name: data.name,
+                price: parseFloat(data.price),
+                recipe: data.recipe,
+                category: data.category,
+                image: res.data.data.display_url
+            }
+            const result = await axiosSecure.post('/menu', newMenu)
+            if (result.data.insertedId) {
+                Swal.fire({
+                    title: "New menu added! ",
+                    icon: "success",
+                    draggable: true
+                });
+            }
+        }
         console.log(res.data);
-          
-    } 
+
+    }
     return (
         <div className='p-6 bg-white'>
             <SectionTitle Heading={'ADD AN ITEMS'} subHeading={'Whats new?'}></SectionTitle>

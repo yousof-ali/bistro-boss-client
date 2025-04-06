@@ -3,6 +3,8 @@ import useCart from '../../../hook/useCart';
 import SectionTitle from '../../../Components/SectionTitle';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hook/useAxiosSecure';
+import { Link } from 'react-router-dom';
+
 
 const Cart = () => {
     const [cart,refetch] = useCart();
@@ -45,7 +47,9 @@ const Cart = () => {
                 <div className='flex justify-between items-center'>
                     <h2 className='text-xl font-bold'>TOTAL ORDERS : {cart.length}</h2>
                     <h2 className='text-xl font-bold'>TOTAL PRICE : {totalAmount}</h2>
-                    <button className='btn btn-secondary'>PAY</button>
+                    {
+                        cart.length ? <Link to={'pyment'}><button className='btn btn-secondary'>PAY</button></Link>:<button className='btn' disabled>PAY</button>
+                    }
 
 
 
