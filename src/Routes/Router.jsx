@@ -18,6 +18,7 @@ import AdminPrivateRoute from "./AdminPrivateRoute";
 import ManageItems from "../Pages/Dashboard/Cart/Admin/ManageItems";
 import UpdateMenu from "../Pages/Dashboard/Cart/Admin/UpdateMenu";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 
 
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
         {
           path:'cart/pyment',
           element:<Payment></Payment>
+        },
+        {
+          path:'pyment-history',
+          element:<PaymentHistory></PaymentHistory>
         },
         // admin routes 
         {
