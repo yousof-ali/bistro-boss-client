@@ -13,7 +13,7 @@ const AddItems = () => {
     const axiosPublic = userAxiosPublic();
     const axiosSecure = useAxiosSecure()
     const onSubmit = async (data) => {
-        console.log(data);
+        // console.log(data);
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
@@ -37,7 +37,7 @@ const AddItems = () => {
                 });
             }
         }
-        console.log(res.data);
+        // console.log(res.data);
 
     }
     return (

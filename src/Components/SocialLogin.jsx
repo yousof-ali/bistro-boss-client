@@ -19,7 +19,7 @@ const SocialLogin = () => {
                     }
                     axiosPublic.post('/user', user)
                         .then(result => {
-                            console.log(result.data); 
+                            // console.log(result.data); 
                             if (result.data.insertedId) {
                                 Swal.fire({
                                     title: "Login with Google",

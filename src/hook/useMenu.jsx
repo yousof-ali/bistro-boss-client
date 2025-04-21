@@ -7,7 +7,7 @@ const userMenu = () => {
     // const [loader,setLoader] = useState(true);
     // useEffect(() => {
     //     setLoader(true);
-    //     fetch('http://localhost:5000/menu')
+    //     fetch('https://bistro-boss-server-iota-bay.vercel.app/menu')
     //         .then(res => res.json())
     //         .then(result => {            
     //             setMenu(result)

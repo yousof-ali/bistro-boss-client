@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 
 const ManageItems = () => {
     const [menu, , refetch] = userMenu();
-    console.log(menu);
+    // console.log(menu);
     const axiosSecure = useAxiosSecure()
 
     const handleEdit = (id) => {
-             console.log(id);
+            //  console.log(id);
     };
 
 
     const handleDelete = async (id) => {
-        console.log("Attempting to delete ID:", id); // Debugging
+        // console.log("Attempting to delete ID:", id); 
 
         Swal.fire({
             title: "Are you sure?",
@@ -30,7 +30,7 @@ const ManageItems = () => {
             if (result.isConfirmed) {
                 try {
                     const res = await axiosSecure.delete(`/menu-delete/${id}`);
-                    console.log("Delete Response:", res.data); // Debugging
+                    // console.log("Delete Response:", res.data); 
 
                     if (res.data.deletedCount > 0) {
                         Swal.fire("Deleted!", "Your item has been deleted.", "success");
@@ -86,7 +86,7 @@ const ManageItems = () => {
                                         </td>
                                         <td>
 
-                                            {single._id}
+                                            {single.name}
 
 
                                         </td>

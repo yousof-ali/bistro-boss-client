@@ -11,7 +11,7 @@ const PaymentHistory = () => {
         queryKey: ['payments', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/payments/${user.email}`);
-            console.log(res.data);
+            // console.log(res.data);
             return res.data;
         },
         enabled: !!user?.email, // Only fetch if user.email is available
@@ -55,7 +55,7 @@ const PaymentHistory = () => {
                                     <td>
                                         <p>{single.email}</p>
                                     </td>
-                                    <td>{single.menuItemIds.length}</td>
+                                    <td className='text-center'>{single.menuItemIds.length}</td>
                                     <td>{single.price}</td>
                                     <td>
                                         <p className='bg-base-300 px-2 rounded-full'>{single.transactionsId}</p>

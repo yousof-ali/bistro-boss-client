@@ -13,7 +13,7 @@ const CheckOutForm = () => {
     const[clientSecret,setClientSecret] = useState('')
     const [transactionsId,setTransactionsId] = useState('');
     const axiosSecure = useAxiosSecure();
-    const[cart] = useCart();
+    const[cart,refetch] = useCart();
     const {user} = useAuth()
     const totalPrice = cart.reduce((total,item) => total+item.price,0)
 
@@ -22,7 +22,7 @@ const CheckOutForm = () => {
             axiosSecure.post('/create-payment-intent',{price:totalPrice})
          .then(res => {
             setClientSecret(res.data.clientSecret);
-            console.log(cart)
+            // console.log(cart)
          })
         }
         
@@ -44,11 +44,11 @@ const CheckOutForm = () => {
             card
         })
         if(error){
-            console.log('pyment error',error);
+            // console.log('pyment error',error);
             setError(error.message)
         }
         else{
-            console.log('pyment method',paymentMethod)
+            // console.log('pyment method',paymentMethod)
             setError('');
         }
         // confirm payment 
@@ -62,11 +62,11 @@ const CheckOutForm = () => {
             }
         })
         if(confirmError){
-            console.log("confirm error")
+            // console.log("confirm error")
         }else{
-            console.log('payment intent',paymentIntent);
+            // console.log('payment intent',paymentIntent);
             if(paymentIntent.status === 'succeeded'){
-                console.log('transaction id',paymentIntent.id)
+                // console.log('transaction id',paymentIntent.id)
                 setTransactionsId(paymentIntent.id);
                 const payment = {
                     email:user?.email,
@@ -78,13 +78,14 @@ const CheckOutForm = () => {
                     status:'pending'
                 }
                 const res = await axiosSecure.post('/payments',payment);
-                console.log(res.data);
-                if(res,data.paymentResult.insertedId){
+                // console.log(res.data);
+                if(res.data.paymentResult.insertedId){
                     Swal.fire({
                         title: "Your Payment Successfully Done!",
                         icon: "success",
                         draggable: true
                       });
+                    refetch()
                 }
             }
         }
